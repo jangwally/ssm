@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loe.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.loe.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="usertype" jdbcType="SMALLINT" property="usertype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, email, password, username, usertype
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from news_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from news_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.loe.entity.User">
+    insert into news_user (id, email, password, 
+      username, usertype)
+    values (#{id,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{usertype,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.loe.entity.User">
+    insert into news_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="usertype != null">
+        usertype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null">
+        #{usertype,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.loe.entity.User">
+    update news_user
+    <set>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null">
+        usertype = #{usertype,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.loe.entity.User">
+    update news_user
+    set email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      usertype = #{usertype,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
