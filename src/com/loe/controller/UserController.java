@@ -28,7 +28,7 @@ public class UserController {
     private CategorySerivcce categorySerivcce;
     @RequestMapping("/user1")
     public String findUser(){
-
+        System.out.println("test git !");
         return "user1";
     }
 
